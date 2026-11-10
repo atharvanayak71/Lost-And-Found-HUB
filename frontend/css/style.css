@@ -1,20 +1,20 @@
 /* ---------- Design tokens ---------- */
 :root {
-    --primary: #4f46e5;
+    --primary: #241bcd;
     --primary-dark: #4338ca;
     --text: #1f2937;
-    --text-muted: #6b7280;
-    --bg: #f8f9fb;
+    --text-muted: #241bcd;
+    --bg: #f8fbff;
     --surface: #ffffff;
-    --border: #e5e7eb;
+    --border: #010205;
     --radius: 12px;
-    --shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+    --shadow: 0 4px 14px rgba(110, 47, 47, 0.06);
 }
 
 /* ---------- Reset + base ---------- */
 * {
     margin: 0;
-    padding: 0;
+    padding: 1;
     box-sizing: border-box;
 }
 
