@@ -40,7 +40,7 @@ function renderItems() {
 
     itemsContainer.innerHTML = filtered.map(function (item) {
         return `
-            <article class="item-card">
+           <article class="item-card" data-id="${item.id}" tabindex="0">
                 <div class="item-top">
                     <span class="item-icon">${item.icon}</span>
                     <span class="badge badge-${item.status.toLowerCase()}">${item.status}</span>
@@ -124,4 +124,54 @@ reportForm.addEventListener("submit", function (event) {
     items.unshift(newItem); // add to the START of the array
     closeModal();
     renderItems();
+});
+
+// ---------- Details modal ----------
+const detailsModal = document.getElementById("detailsModal");
+
+function openDetails(id) {
+    const item = items.find(function (i) { return i.id === id; });
+    if (!item) return;
+
+    document.getElementById("detailsIcon").textContent = item.icon;
+    document.getElementById("detailsTitle").textContent = item.title;
+    document.getElementById("detailsCategory").textContent = item.category;
+    document.getElementById("detailsLocation").textContent = item.location;
+    document.getElementById("detailsDate").textContent = item.date;
+    document.getElementById("detailsDescription").textContent =
+        item.description || "No description provided.";
+    document.getElementById("detailsContact").textContent =
+        item.contact || "Not provided";
+
+    const badge = document.getElementById("detailsBadge");
+    badge.textContent = item.status;
+    badge.className = "badge badge-" + item.status.toLowerCase();
+
+    detailsModal.hidden = false;
+}
+
+function closeDetails() {
+    detailsModal.hidden = true;
+}
+
+// One listener on the container handles every card, including newly added ones
+itemsContainer.addEventListener("click", function (event) {
+    const card = event.target.closest(".item-card");
+    if (card) openDetails(Number(card.dataset.id));
+});
+
+itemsContainer.addEventListener("keydown", function (event) {
+    if (event.key !== "Enter") return;
+    const card = event.target.closest(".item-card");
+    if (card) openDetails(Number(card.dataset.id));
+});
+
+document.getElementById("closeDetails").addEventListener("click", closeDetails);
+
+detailsModal.addEventListener("click", function (event) {
+    if (event.target === detailsModal) closeDetails();
+});
+
+document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") closeDetails();
 });
