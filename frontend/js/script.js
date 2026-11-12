@@ -5,7 +5,8 @@ const items = [
     { id: 3, title: "Data Structures Book", category: "Books",       status: "Lost",  location: "Block C, Room 204",     date: "Nov 8",  icon: "📘" },
     { id: 4, title: "Wireless Earbuds",     category: "Electronics", status: "Found", location: "Main Gate",             date: "Nov 10", icon: "🎧" },
     { id: 5, title: "Silver Wrist Watch",   category: "Accessories", status: "Lost",  location: "Sports Ground",         date: "Nov 7",  icon: "⌚" },
-    { id: 6, title: "Physics Notebook",     category: "Books",       status: "Found", location: "Seminar Hall",          date: "Nov 9",  icon: "📓" }
+    { id: 6, title: "Physics Notebook",     category: "Books",       status: "Found", location: "Seminar Hall",          date: "Nov 9",  icon: "📓" },
+    { id: 7, title: "Calculus Textbook",    category: "Books",       status: "Lost",  location: "Block A, Room 101",     date: "Nov 6",  icon: "📘" }
 ];
 
 // ---------- Makes user-typed text safe to insert into HTML ----------
