@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:,">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -15,13 +15,20 @@
     <header class="navbar">
         <a href="#" class="logo">find<span>.</span></a>
 
-        <nav>
+        <nav id="mainNav">
             <a href="#" class="active">Home</a>
             <a href="#items">Browse Items</a>
             <a href="#about">About</a>
         </nav>
 
         <button class="nav-btn">Report an Item</button>
+
+        <button class="menu-toggle" id="menuToggle" type="button"
+            aria-label="Toggle menu" aria-expanded="false" aria-controls="mainNav">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
     </header>
 
     <main>
@@ -74,11 +81,11 @@
             <div class="items-grid" id="itemsContainer"></div>
 
             <div id="emptyMessage" class="empty-state" hidden>
-    <div class="empty-icon">🔍</div>
-    <h3>No items found</h3>
-    <p>Try a different search or category, or report the item yourself.</p>
-    <button type="button" class="empty-btn" id="clearFiltersBtn">Clear filters</button>
-</div>
+                <div class="empty-icon">🔍</div>
+                <h3>No items found</h3>
+                <p>Try a different search or category, or report the item yourself.</p>
+                <button type="button" class="empty-btn" id="clearFiltersBtn">Clear filters</button>
+            </div>
         </section>
     </main>
 
@@ -87,66 +94,72 @@
         <p>Lost things deserve to be found. © 2026 Lost & Found Hub.</p>
     </footer>
 
+    <!-- Report modal -->
     <div class="modal-overlay" id="reportModal" hidden>
-    <div class="modal">
-        <button class="modal-close" id="closeModal" type="button" aria-label="Close">&times;</button>
-        <h2 id="modalTitle">Report an item</h2>
+        <div class="modal">
+            <button class="modal-close" id="closeModal" type="button" aria-label="Close">&times;</button>
+            <h2 id="modalTitle">Report an item</h2>
 
-        <form id="reportForm">
-            <input type="hidden" id="reportStatus" value="Lost">
+            <form id="reportForm" novalidate>
+                <input type="hidden" id="reportStatus" value="Lost">
 
-            <label for="itemTitle">Item name</label>
-            <input type="text" id="itemTitle" required maxlength="60" placeholder="e.g. Black leather wallet">
+                <label for="itemTitle">Item name</label>
+                <input type="text" id="itemTitle" required maxlength="60" placeholder="e.g. Black leather wallet">
+                <p class="field-error" id="titleError"></p>
 
-            <label for="itemCategory">Category</label>
-            <select id="itemCategory" required>
-                <option value="Electronics">Electronics</option>
-                <option value="Accessories">Accessories</option>
-                <option value="Books">Books</option>
-            </select>
+                <label for="itemCategory">Category</label>
+                <select id="itemCategory" required>
+                    <option value="Electronics">Electronics</option>
+                    <option value="Accessories">Accessories</option>
+                    <option value="Books">Books</option>
+                </select>
 
-            <label for="itemLocation">Location</label>
-            <input type="text" id="itemLocation" required placeholder="e.g. Library, ground floor">
+                <label for="itemLocation">Location</label>
+                <input type="text" id="itemLocation" required maxlength="80" placeholder="e.g. Library, ground floor">
+                <p class="field-error" id="locationError"></p>
 
-            <label for="itemDate">Date</label>
-            <input type="date" id="itemDate" required>
+                <label for="itemDate">Date</label>
+                <input type="date" id="itemDate" required>
+                <p class="field-error" id="dateError"></p>
 
-            <label for="itemDescription">Description</label>
-            <textarea id="itemDescription" rows="3" placeholder="Colour, brand, anything unique..."></textarea>
+                <label for="itemDescription">Description</label>
+                <textarea id="itemDescription" rows="3" maxlength="300" placeholder="Colour, brand, anything unique..."></textarea>
 
-            <label for="itemContact">Your contact (phone or email)</label>
-            <input type="text" id="itemContact" required placeholder="So the other person can reach you">
+                <label for="itemContact">Your contact (phone or email)</label>
+                <input type="text" id="itemContact" required maxlength="60" placeholder="So the other person can reach you">
+                <p class="field-error" id="contactError"></p>
 
-            <button type="submit" class="submit-btn">Submit report</button>
-        </form>
-    </div>
-</div>
-
-<div class="modal-overlay" id="detailsModal" hidden>
-    <div class="modal">
-        <button class="modal-close" id="closeDetails" type="button" aria-label="Close">&times;</button>
-
-        <div class="details-top">
-            <span class="item-icon" id="detailsIcon"></span>
-            <span class="badge" id="detailsBadge"></span>
+                <button type="submit" class="submit-btn">Submit report</button>
+            </form>
         </div>
-
-        <h2 id="detailsTitle"></h2>
-
-        <dl class="details-list">
-            <dt>Category</dt>
-            <dd id="detailsCategory"></dd>
-            <dt>Location</dt>
-            <dd id="detailsLocation"></dd>
-            <dt>Date</dt>
-            <dd id="detailsDate"></dd>
-            <dt>Description</dt>
-            <dd id="detailsDescription"></dd>
-            <dt>Contact</dt>
-            <dd id="detailsContact"></dd>
-        </dl>
     </div>
-</div>
+
+    <!-- Details modal -->
+    <div class="modal-overlay" id="detailsModal" hidden>
+        <div class="modal">
+            <button class="modal-close" id="closeDetails" type="button" aria-label="Close">&times;</button>
+
+            <div class="details-top">
+                <span class="item-icon" id="detailsIcon"></span>
+                <span class="badge" id="detailsBadge"></span>
+            </div>
+
+            <h2 id="detailsTitle"></h2>
+
+            <dl class="details-list">
+                <dt>Category</dt>
+                <dd id="detailsCategory"></dd>
+                <dt>Location</dt>
+                <dd id="detailsLocation"></dd>
+                <dt>Date</dt>
+                <dd id="detailsDate"></dd>
+                <dt>Description</dt>
+                <dd id="detailsDescription"></dd>
+                <dt>Contact</dt>
+                <dd id="detailsContact"></dd>
+            </dl>
+        </div>
+    </div>
 
     <script src="js/script.js"></script>
 </body>
