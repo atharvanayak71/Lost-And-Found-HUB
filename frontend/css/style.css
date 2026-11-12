@@ -357,6 +357,105 @@ footer .logo {
     margin-bottom: 8px;
 }
 
+/* ---------- Report modal ---------- */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(5, 2, 15, 0.7);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 200;
+}
+
+.modal-overlay[hidden] {
+    display: none;
+}
+
+.modal {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    max-height: 90vh;
+    overflow-y: auto;
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+}
+
+.modal h2 {
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+.modal-close {
+    position: absolute;
+    top: 14px;
+    right: 18px;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.modal-close:hover {
+    color: var(--text);
+}
+
+.modal label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent);
+    margin: 14px 0 6px;
+}
+
+.modal input[type="text"],
+.modal input[type="date"],
+.modal select,
+.modal textarea {
+    width: 100%;
+    padding: 10px 14px;
+    background-color: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 15px;
+    color-scheme: dark;
+}
+
+.modal input:focus,
+.modal select:focus,
+.modal textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.submit-btn {
+    width: 100%;
+    margin-top: 22px;
+    padding: 12px;
+    background-color: var(--primary);
+    color: #ffffff;
+    border: none;
+    border-radius: var(--radius);
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.submit-btn:hover {
+    background-color: var(--primary-dark);
+}
+
 /* ---------- Responsive (phones and small tablets) ---------- */
 @media (max-width: 768px) {
     .navbar {

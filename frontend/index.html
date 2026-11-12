@@ -82,6 +82,41 @@
         <p>Lost things deserve to be found. © 2026 Lost & Found Hub.</p>
     </footer>
 
+    <div class="modal-overlay" id="reportModal" hidden>
+    <div class="modal">
+        <button class="modal-close" id="closeModal" type="button" aria-label="Close">&times;</button>
+        <h2 id="modalTitle">Report an item</h2>
+
+        <form id="reportForm">
+            <input type="hidden" id="reportStatus" value="Lost">
+
+            <label for="itemTitle">Item name</label>
+            <input type="text" id="itemTitle" required maxlength="60" placeholder="e.g. Black leather wallet">
+
+            <label for="itemCategory">Category</label>
+            <select id="itemCategory" required>
+                <option value="Electronics">Electronics</option>
+                <option value="Accessories">Accessories</option>
+                <option value="Books">Books</option>
+            </select>
+
+            <label for="itemLocation">Location</label>
+            <input type="text" id="itemLocation" required placeholder="e.g. Library, ground floor">
+
+            <label for="itemDate">Date</label>
+            <input type="date" id="itemDate" required>
+
+            <label for="itemDescription">Description</label>
+            <textarea id="itemDescription" rows="3" placeholder="Colour, brand, anything unique..."></textarea>
+
+            <label for="itemContact">Your contact (phone or email)</label>
+            <input type="text" id="itemContact" required placeholder="So the other person can reach you">
+
+            <button type="submit" class="submit-btn">Submit report</button>
+        </form>
+    </div>
+</div>
+
     <script src="js/script.js"></script>
 </body>
 </html>
