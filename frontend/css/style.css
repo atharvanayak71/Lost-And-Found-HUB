@@ -365,12 +365,62 @@ body {
     color: var(--text-muted);
 }
 
-#emptyMessage {
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-    color: var(--text-muted);
-    padding: 40px 0;
+    padding: 56px 24px;
+    border: 1px dashed var(--border-strong);
+    border-radius: var(--radius-lg);
+    background-color: var(--surface);
 }
 
+.empty-state[hidden] {
+    display: none;
+}
+
+.empty-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    font-size: 26px;
+    background-color: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 16px;
+}
+
+.empty-state h3 {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    margin-bottom: 6px;
+}
+
+.empty-state p {
+    color: var(--text-muted);
+    max-width: 340px;
+    margin-bottom: 20px;
+}
+
+.empty-btn {
+    padding: 10px 22px;
+    background-color: var(--text);
+    color: #000000;
+    border: none;
+    border-radius: var(--radius);
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.empty-btn:hover {
+    background-color: #d4d4d4;
+}
 /* ---------- Footer ---------- */
 footer {
     text-align: center;
@@ -547,4 +597,4 @@ footer .logo {
     .section-heading h2 {
         font-size: 30px;
     }
-}
+} 

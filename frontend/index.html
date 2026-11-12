@@ -73,7 +73,12 @@
 
             <div class="items-grid" id="itemsContainer"></div>
 
-            <p id="emptyMessage" hidden>No matching items found.</p>
+            <div id="emptyMessage" class="empty-state" hidden>
+    <div class="empty-icon">🔍</div>
+    <h3>No items found</h3>
+    <p>Try a different search or category, or report the item yourself.</p>
+    <button type="button" class="empty-btn" id="clearFiltersBtn">Clear filters</button>
+</div>
         </section>
     </main>
 

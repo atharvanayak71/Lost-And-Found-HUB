@@ -4,7 +4,7 @@ const items = [
     { id: 2, title: "iPhone 13 (Blue)",     category: "Electronics", status: "Found", location: "Cafeteria",             date: "Nov 10", icon: "📱" },
     { id: 3, title: "Data Structures Book", category: "Books",       status: "Lost",  location: "Block C, Room 204",     date: "Nov 8",  icon: "📘" },
     { id: 4, title: "Wireless Earbuds",     category: "Electronics", status: "Found", location: "Main Gate",             date: "Nov 10", icon: "🎧" },
-    { id: 5, title: "Silver Wrist Watch",   category: "Accessories", status: "Lost",  location: "Sports Ground",         date: "Nov 7",  icon: "⌚" },
+    { id: 5, title: "Silver Wrist Watch",   category: "Accessories", status: "Found",  location: "Sports Ground",         date: "Nov 7",  icon: "⌚" },
     { id: 6, title: "Physics Notebook",     category: "Books",       status: "Found", location: "Seminar Hall",          date: "Nov 9",  icon: "📓" },
     { id: 7, title: "Calculus Textbook",    category: "Books",       status: "Lost",  location: "Block A, Room 101",     date: "Nov 6",  icon: "📘" }
 ];
@@ -174,4 +174,14 @@ detailsModal.addEventListener("click", function (event) {
 
 document.addEventListener("keydown", function (event) {
     if (event.key === "Escape") closeDetails();
+});
+
+// ---------- Empty state: clear filters ----------
+document.getElementById("clearFiltersBtn").addEventListener("click", function () {
+    searchInput.value = "";
+    activeCategory = "All";
+    filterButtons.forEach(function (b) {
+        b.classList.toggle("active", b.dataset.category === "All");
+    });
+    renderItems();
 });
