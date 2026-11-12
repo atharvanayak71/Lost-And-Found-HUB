@@ -8,7 +8,7 @@ const items = [
     { id: 6, title: "Physics Notebook",     category: "Books",       status: "Found", location: "Seminar Hall",          date: "Nov 9",  icon: "📓" }
 ];
 
-// Makes user-typed text safe to insert into HTML
+// ---------- Makes user-typed text safe to insert into HTML ----------
 function escapeHTML(text) {
     const div = document.createElement("div");
     div.textContent = text;
@@ -27,17 +27,6 @@ let activeCategory = "All";
 
 // ---------- Draw the cards on the page ----------
 function renderItems() {
-                <article class="item-card">
-                <div class="item-top">
-                    <span class="item-icon">${item.icon}</span>
-                    <span class="badge badge-${item.status.toLowerCase()}">${item.status}</span>
-                </div>
-                <h3>${escapeHTML(item.title)}</h3>
-                <p class="item-meta">📍 ${escapeHTML(item.location)}</p>
-                <p class="item-meta">🗓️ ${escapeHTML(item.date)} · ${item.category}</p>
-                ${item.contact ? `<p class="item-meta">📞 ${escapeHTML(item.contact)}</p>` : ""}
-            </article>
-
     const query = searchInput.value.trim().toLowerCase();
 
     const filtered = items.filter(function (item) {
@@ -55,15 +44,32 @@ function renderItems() {
                     <span class="item-icon">${item.icon}</span>
                     <span class="badge badge-${item.status.toLowerCase()}">${item.status}</span>
                 </div>
-                <h3>${item.title}</h3>
-                <p class="item-meta">📍 ${item.location}</p>
-                <p class="item-meta">🗓️ ${item.date} · ${item.category}</p>
+                <h3>${escapeHTML(item.title)}</h3>
+                <p class="item-meta">📍 ${escapeHTML(item.location)}</p>
+                <p class="item-meta">🗓️ ${escapeHTML(item.date)} · ${item.category}</p>
+                ${item.contact ? `<p class="item-meta">📞 ${escapeHTML(item.contact)}</p>` : ""}
             </article>
         `;
     }).join("");
 
     emptyMessage.hidden = filtered.length > 0;
 }
+
+// ---------- Filter and search events ----------
+filterButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+        filterButtons.forEach(function (b) { b.classList.remove("active"); });
+        button.classList.add("active");
+        activeCategory = button.dataset.category;
+        renderItems();
+    });
+});
+
+searchInput.addEventListener("input", renderItems);
+searchBtn.addEventListener("click", renderItems);
+
+// ---------- First draw when the page loads ----------
+renderItems();
 
 // ---------- Report modal ----------
 const reportModal = document.getElementById("reportModal");
@@ -118,19 +124,3 @@ reportForm.addEventListener("submit", function (event) {
     closeModal();
     renderItems();
 });
-
-// ---------- Events: what happens when the user does something ----------
-filterButtons.forEach(function (button) {
-    button.addEventListener("click", function () {
-        filterButtons.forEach(function (b) { b.classList.remove("active"); });
-        button.classList.add("active");
-        activeCategory = button.dataset.category;
-        renderItems();
-    });
-});
-
-searchInput.addEventListener("input", renderItems);
-searchBtn.addEventListener("click", renderItems);
-
-// ---------- First draw when the page loads ----------
-renderItems();
