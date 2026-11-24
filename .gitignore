@@ -1,0 +1,15 @@
+# Python virtual environment
+venv/
+.venv/
+
+# Python cache files
+__pycache__/
+*.pyc
+
+# Secrets (database password, JWT secret key)
+.env
+
+# Editor and OS files
+.vscode/
+.idea/
+Thumbs.db
